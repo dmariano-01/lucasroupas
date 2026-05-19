@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DRIP — AI Fashion</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav>
+    <div class="logo">LOOKA</div>
+    <div class="nav-links">
+      <a class="nav-link" onclick="showView('landing')">Início</a>
+      <a class="nav-link" onclick="showView('shop')">Loja</a>
+      <a class="nav-link" onclick="showView('tryon')">Experimente</a>
+      <a class="nav-link" onclick="showView('dashboard')">Dashboard</a>
+    </div>
+    <button class="nav-cta" onclick="showView('tryon')">Experimente com IA</button>
+  </nav>
+
+  <div class="loading-overlay" id="loadingOverlay">
+    <div style="font-family:var(--font-display);font-size:32px;letter-spacing:4px;margin-bottom:32px;color:var(--accent)">GENERATING</div>
+    <div class="loading-spinner"></div>
+    <div class="loading-progress"><div class="loading-bar" id="loadBar"></div></div>
+    <div class="loading-text" id="loadText">Analisando sua foto...</div>
+  </div>
+
+  <div class="toast-container" id="toastContainer"></div>
+
+  <div class="view active" id="view-landing">
+
+    <div class="hero">
+      <div class="hero-bg">
+        <svg class="shape-grid" viewBox="0 0 1400 900" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+              <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" stroke-width="0.5"/>
+            </pattern>
+          </defs>
+          <rect width="1400" height="900" fill="url(#grid)"/>
+          <circle cx="200" cy="150" r="80" fill="none" stroke="#6c63ff" stroke-width="0.5" opacity="0.4"/>
+          <circle cx="1200" cy="600" r="120" fill="none" stroke="#a78bfa" stroke-width="0.5" opacity="0.3"/>
+          <circle cx="700" cy="450" r="200" fill="none" stroke="#6c63ff" stroke-width="0.3" opacity="0.2"/>
+          <polygon points="100,700 180,560 260,700" fill="none" stroke="#6c63ff" stroke-width="0.5" opacity="0.3"/>
+          <polygon points="1100,100 1200,50 1300,100 1300,200 1200,250 1100,200" fill="none" stroke="#a78bfa" stroke-width="0.5" opacity="0.3"/>
+        </svg>
+        <div class="hero-ascii">FASHION</div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge"><span class="hero-badge-dot"></span>AI-Powered Virtual Try-On</div>
+        <h1 class="hero-h1">Experimente suas roupas<em>Antes de comprar.</em></h1>
+        <p class="hero-sub">Envie sua foto, escolha qualquer peça da nossa coleção, e veja a IA transformar você em segundos.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="showView('tryon')">Teste agora — É grátis!</button>
+          <button class="btn-outline" onclick="showView('shop')">Navegar pela coleção</button>
+        </div>
+      </div>
+      <div class="hero-scroll">
+        <div class="scroll-line"></div>
+        <span>Scroll</span>
+      </div>
+    </div>
+
+    <section>
+      <div class="container">
+        <div class="section-label fade-up">01 — Processo</div>
+        <h2 class="section-title fade-up">Como funciona?</h2>
+        <p class="section-sub fade-up">Três passos simples para ver você em qualquer roupa - sem necessidade de um provador.</p>
+        <div class="how-grid fade-up" style="transition-delay:.1s">
+          <div class="how-card">
+            <span class="how-number">01</span>
+             <img src="img/desenho3.png" class="emoji-img" alt="📸">
+            <h3 class="how-title">Envie sua foto</h3>
+            <p class="how-desc">Tire ou envie uma foto sua de corpo inteiro. Nossa IA preserva sua face, corpo, e luz natural.</p>
+          </div>
+          <div class="how-card">
+            <span class="how-number">02</span>
+            <img src="img/desenho2.png" class="emoji-img" alt="👕">
+            <h3 class="how-title">Selecione uma roupa</h3>
+            <p class="how-desc">Navegue pela nossa coleção de roupas e escolha uma delas.</p>
+          </div>
+          <div class="how-card">
+            <span class="how-number">03</span>
+            <img src="img/desenho1.png" class="emoji-img" alt="✨">
+            <h3 class="how-title">Veja o resultado</h3>
+            <p class="how-desc">Em segundos nossa IA gera uma imagem de como a roupa ficará em você.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="stats-section">
+      <div class="stats-grid">
+        <div class="stat-card fade-up"><div class="stat-number">94%</div><div class="stat-label">Eficácia</div></div>
+        <div class="stat-card fade-up" style="transition-delay:.1s"><div class="stat-number">3s</div><div class="stat-label">Tempo médio de geração</div></div>
+        <div class="stat-card fade-up" style="transition-delay:.2s"><div class="stat-number">0</div><div class="stat-label">Usos diários</div></div>
+        <div class="stat-card fade-up" style="transition-delay:.3s"><div class="stat-number">0</div><div class="stat-label">Peças curadas</div></div>
+      </div>
+    </div>
+
+    <section>
+      <div class="container">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:60px;flex-wrap:wrap;gap:20px">
+          <div>
+            <div class="section-label fade-up">02 — Catálogo</div>
+            <h2 class="section-title fade-up">Peças em destaque</h2>
+          </div>
+          <button class="btn-outline fade-up" onclick="showView('shop')">Ver tudo</button>
+        </div>
+        <div class="products-grid fade-up">
+          <div class="product-card" onclick="openProduct(0)">
+            <div class="product-img">
+              <img src="img/desenho4.png" class="emoji-imga" alt="🧥">
+              <div class="product-overlay"><button class="try-btn" onclick="event.stopPropagation();selectProductAndTry(0)">Provar com IA</button></div>
+            </div>
+            <div class="product-tag">Novo</div>
+            <div class="product-info">
+              <div class="product-name">Jaqueta do Leon RE4</div>
+              <div class="product-meta"><span class="product-price">R$480</span><span class="product-category">Jaquetas</span></div>
+            </div>
+          </div>
+          <div class="product-card" onclick="openProduct(1)">
+            <div class="product-img" style="background:#1a1520">
+              <img src="img/desenho5.png" class="emoji-imga" alt="👗">
+              <div class="product-overlay"><button class="try-btn" onclick="event.stopPropagation();selectProductAndTry(1)">Provar com IA</button></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">Vestido Azul Esquizóide</div>
+              <div class="product-meta"><span class="product-price">R$320</span><span class="product-category">Vestidos</span></div>
+            </div>
+          </div>
+          <div class="product-card" onclick="openProduct(2)">
+            <div class="product-img" style="background:#151a18">
+              <img src="img/desenho6.png" class="emoji-imga" alt="👖">
+              <div class="product-overlay"><button class="try-btn" onclick="event.stopPropagation();selectProductAndTry(2)">Provar com IA</button></div>
+            </div>
+            <div class="product-tag">Bestseller</div>
+            <div class="product-info">
+              <div class="product-name">Calça SAMVEEAAAUBDMPEEPAESMUEOQIEOQVD</div>
+              <div class="product-meta"><span class="product-price">R$240</span><span class="product-category">Inferiores</span></div>
+            </div>
+          </div>
+          <div class="product-card" onclick="openProduct(3)">
+            <div class="product-img" style="background:#1a1615">
+              <img src="img/desenho7.png" class="emoji-imga" alt="👔">
+              <div class="product-overlay"><button class="try-btn" onclick="event.stopPropagation();selectProductAndTry(3)">Provar com IA</button></div>
+            </div>
+            <div class="product-info">
+              <div class="product-name">Roupa Transparente elegante</div>
+              <div class="product-meta"><span class="product-price">R$195</span><span class="product-category">Superiores</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section style="background:var(--bg2);border-top:1px solid var(--border)">
+      <div class="container">
+        <div class="section-label fade-up">03 — Por que usar a LOOKA</div>
+        <h2 class="section-title fade-up">Compras inteligentes.<br>Menos retornos.</h2>
+        <div class="benefits-grid fade-up">
+          <div class="benefit-card">
+            <div class="benefit-icon"></div>
+            <div class="benefit-content">
+              <div class="benefit-title">Renderização Hiper-Realista</div>
+              <div class="benefit-desc">Nosso modelo IDM-VTON mapeia com precisão as roupas para o formato do seu corpo, preservando o caimento natural, o ajuste e a textura do tecido.</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"></div>
+            <div class="benefit-content">
+              <div class="benefit-title">Resultados Instatâneos</div>
+              <div class="benefit-desc">Sem espera, sem filas. Gerações completas em menos de 3 segundos para que você possa explorar todo o catálogo rapidamente.</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"></div>
+            <div class="benefit-content">
+              <div class="benefit-title">Privacidade</div>
+              <div class="benefit-desc">Suas fotos são processadas em tempo real e nunca armazenadas permanentemente. Total conformidade com o GDPR incorporada desde o primeiro dia.</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-icon"></div>
+            <div class="benefit-content">
+              <div class="benefit-title">Compartilhar &amp; salvar</div>
+              <div class="benefit-desc">Baixe seus resultados de experimentação, compartilhe nas redes sociais ou salve os looks no seu lookbook pessoal para depois.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="container">
+        <div class="footer-top">
+          <div class="footer-brand">
+            <div class="footer-logo">DRI<span>P</span></div>
+            <p class="footer-desc">AI-powered virtual fitting for the modern wardrobe. See yourself in any outfit before you buy it.</p>
+          </div>
+          <div>
+            <div class="footer-col-title">Produtos</div>
+            <div class="footer-links">
+              <a class="footer-link" onclick="showView('shop')">Shop</a>
+              <a class="footer-link" onclick="showView('tryon')">Experimentação virtual.</a>
+              <a class="footer-link" onclick="showView('dashboard')">Dashboard</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-title">Empresa</div>
+            <div class="footer-links">
+              <a class="footer-link">Sobre</a>
+              <a class="footer-link">Carreiras</a>
+              <a class="footer-link"></a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-title">Legal</div>
+            <div class="footer-links">
+              <a class="footer-link">Privacidade</a>
+              <a class="footer-link">Termos</a>
+              <a class="footer-link">Cookies</a>
+            </div>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span class="footer-copy"></span>
+          <span class="footer-copy"></span>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+  <div class="view" id="view-shop">
+    <div class="page-header">
+      <div class="container">
+        <span class="section-label">Coleção</span>
+        <h1 class="section-title">Loja</h1>
+        <p class="section-sub">Cada peça está pronta para experimentar. Toque em qualquer cartão para pré-visualizá-la no seu corpo.</p>
+      </div>
+    </div>
+    <section>
+      <div class="container">
+        <div class="filter-row">
+          <button class="filter-btn active" onclick="filterProducts(this,'all')">Tudo</button>
+          <button class="filter-btn" onclick="filterProducts(this,'tops')">Superiores</button>
+          <button class="filter-btn" onclick="filterProducts(this,'bottoms')">Inferiores</button>
+          <button class="filter-btn" onclick="filterProducts(this,'dresses')">Vestidos</button>
+          <button class="filter-btn" onclick="filterProducts(this,'outerwear')">Jaquetas</button>
+        </div>
+        <div class="products-grid" id="shopGrid"></div>
+      </div>
+    </section>
+  </div>
+
+  <div class="view" id="view-product">
+    <div class="page-header">
+      <div class="container">
+        <span class="section-label" style="cursor:pointer" onclick="showView('shop')">← Back to Shop</span>
+      </div>
+    </div>
+    <div style="padding:0 40px 120px;max-width:1280px;margin:0 auto">
+      <div class="product-detail-grid">
+        <div class="product-gallery">
+          <div class="product-main-img" id="detailImg">👗</div>
+        </div>
+        <div class="product-detail-info">
+          <div class="product-detail-name" id="detailName">Vestido Azul Esquizóide</div>
+          <div class="product-detail-price" id="detailPrice">R$320</div>
+          <div class="size-label">Tamanho</div>
+          <div class="size-grid">
+            <button class="size-btn" onclick="selectSize(this)">XS</button>
+            <button class="size-btn active" onclick="selectSize(this)">S</button>
+            <button class="size-btn" onclick="selectSize(this)">M</button>
+            <button class="size-btn" onclick="selectSize(this)">L</button>
+            <button class="size-btn" onclick="selectSize(this)">XL</button>
+          </div>
+<div class="size-label">Cor</div>
+<div class="color-grid" id="detailColors"></div>
+
+<button class="add-to-cart-btn" onclick="addToCart()">
+  Adicionar ao carrinho
+</button>
+
+<button class="generate-btn" id="detailTryBtn" onclick="tryCurrentProduct()">
+  ✦ Gerar Provador Virtual
+</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="view" id="view-tryon">
+  <div class="page-header">
+    <div class="container">
+      <span class="section-label">Estúdio IA</span>
+
+      <h1 class="section-title">
+        Provador Virtual
+      </h1>
+
+      <p class="section-sub">
+        Envie sua foto e veja qualquer peça da nossa coleção em você — com tecnologia de IA.
+      </p>
+    </div>
+  </div>
+
+  <div style="padding:60px 40px 120px;max-width:1280px;margin:0 auto">
+    <div class="tryon-layout">
+
+      <div class="tryon-panel">
+
+        <div class="panel-title">
+          01 — Sua Foto
+        </div>
+
+        <div class="upload-zone" id="uploadZone"
+          onclick="document.getElementById('fileInput').click()">
+
+          <input type="file"
+            id="fileInput"
+            accept="image/*"
+            style="display:none"
+            onchange="handleFileUpload(event)">
+
+          <div class="upload-icon" id="uploadIcon">📷</div>
+
+          <div class="upload-text" id="uploadLabel">
+            Clique para enviar sua foto
+          </div>
+
+          <div class="upload-sub" id="uploadSub">
+            JPG, PNG ou WEBP — Corpo inteiro recomendado
+          </div>
+
+          <img id="uploadedPreview"
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:15px;display:none"
+            alt="Sua foto">
+        </div>
+
+        <div style="margin-top:32px">
+
+          <div class="panel-title">
+            02 — Escolha a Roupa
+          </div>
+
+          <div class="clothes-mini-grid" id="clothesMiniGrid"></div>
+        </div>
+
+        <div class="generate-section">
+
+          <button class="generate-btn"
+            id="generateBtn"
+            onclick="generateTryOn()"
+            disabled>
+
+            ✦ &nbsp;Gerar Provador Virtual
+
+          </button>
+
+          <div style="font-size:11px;color:var(--text3);text-align:center;margin-top:12px;font-family:var(--font-mono);letter-spacing:1px">
+            Tecnologia Replicate × IDM-VTON
+          </div>
+
+        </div>
+      </div>
+
+      <div class="result-panel" id="resultPanel">
+
+        <div class="result-empty" id="resultEmpty">
+
+          <div class="result-empty-icon">🪞</div>
+
+          <div class="result-empty-text">
+            Envie sua foto e escolha uma roupa para gerar seu provador virtual.
+          </div>
+
+        </div>
+
+        <div id="resultContent"
+          style="display:none;flex-direction:column;align-items:center;width:100%">
+
+          <div class="panel-title" style="align-self:flex-start">
+            03 — Resultado
+          </div>
+
+          <div style="display:flex;gap:16px;width:100%;margin-bottom:24px;flex-wrap:wrap">
+
+            <div style="flex:1;min-width:140px">
+
+              <div style="font-size:11px;color:var(--text3);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:10px">
+                ANTES
+              </div>
+
+              <div id="beforeImg"
+                style="aspect-ratio:3/4;background:var(--bg3);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:40px">
+
+                📷
+
+              </div>
+            </div>
+
+            <div style="flex:1;min-width:140px">
+
+              <div style="font-size:11px;color:var(--accent);font-family:var(--font-mono);letter-spacing:1px;margin-bottom:10px">
+                DEPOIS — IA
+              </div>
+
+              <div id="afterImg"
+                style="aspect-ratio:3/4;background:linear-gradient(135deg,#1a1535,#0d1a2e);border-radius:12px;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:40px">
+
+                ✨
+
+              </div>
+            </div>
+
+          </div>
+
+          <div class="result-actions">
+
+            <button class="result-action-btn" onclick="downloadResult()">
+              ↓ Baixar
+            </button>
+
+            <button class="result-action-btn" onclick="shareResult()">
+              ↗ Compartilhar
+            </button>
+
+            <button class="result-action-btn" onclick="saveToLookbook()">
+              ♡ Salvar
+            </button>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="view" id="view-dashboard">
+
+  <div class="page-header">
+    <div class="container">
+
+      <span class="section-label">
+        Seu Estúdio
+      </span>
+
+      <h1 class="section-title">
+        Painel
+      </h1>
+
+    </div>
+  </div>
+
+  <section>
+
+    <div class="container">
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:2px;background:var(--border);margin-bottom:60px">
+
+        <div class="stat-card">
+          <div class="stat-number" id="dashTrials">0</div>
+          <div class="stat-label">Provadores</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number" id="dashSaved">0</div>
+          <div class="stat-label">Looks salvos</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-number" id="dashFavs">0</div>
+          <div class="stat-label">Favoritos</div>
+        </div>
+
+      </div>
+
+      <h3 style="font-size:16px;font-weight:500;margin-bottom:32px;letter-spacing:1px">
+        Gerações recentes
+      </h3>
+
+      <div id="historyGrid"
+        style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px">
+      </div>
+
+      <div id="historyEmpty"
+        style="text-align:center;padding:80px;color:var(--text3)">
+
+        <div style="font-size:48px;margin-bottom:16px">
+          🪄
+        </div>
+
+        <div style="font-size:14px;line-height:1.6">
+          Nenhum provador ainda.<br>
+          Vá para o Estúdio IA para gerar seu primeiro look.
+        </div>
+
+        <button class="btn-primary"
+          style="margin-top:32px"
+          onclick="showView('tryon')">
+
+          Abrir Estúdio IA
+
+        </button>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
